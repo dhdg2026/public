@@ -7,142 +7,168 @@
     <style>
         :root {
             --primary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --bg-color: #f8f9fa;
+            --bg-color: #f4f6f9;
+            --text-color: #333333;
+            --border-radius: 12px;
         }
+        * { box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
             background-color: var(--bg-color);
-            color: #333;
+            color: var(--text-color);
         }
         .header {
             background-color: var(--primary-color);
             color: white;
             text-align: center;
-            padding: 2rem 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 2.5rem 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
         .header h1 {
             margin: 0;
             font-size: 1.8rem;
+            font-weight: 600;
             letter-spacing: 1px;
         }
         .container {
-            max-width: 800px;
+            width: 100%;
+            max-width: 900px;
             margin: 2rem auto;
-            padding: 0 1rem;
+            padding: 0 1.25rem;
         }
-        .notice-card {
+        .notice-list {
             background: white;
-            border-left: 5px solid var(--primary-color);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-radius: 0 8px 8px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
-        }
-        .notice-card:hover {
-            transform: translateY(-2px);
-        }
-        .notice-card.pinned {
-            border-left-color: var(--accent-color);
-            background-color: #fff9f9;
-        }
-        .notice-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem;
-            color: #7f8c8d;
-            margin-bottom: 0.5rem;
-        }
-        .badge {
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            color: white;
-        }
-        .badge.important { background-color: var(--accent-color); }
-        .badge.general { background-color: #3498db; }
-        .badge.finance { background-color: #2ecc71; }
-        
-        .notice-title {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.25rem;
-            color: var(--primary-color);
-        }
-        .notice-content {
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            padding: 0;
             margin: 0;
-            white-space: pre-line;
-            color: #555;
+            list-style: none;
+            overflow: hidden;
+        }
+        .notice-item {
+            border-bottom: 1px solid #edf2f7;
+            transition: background-color 0.2s ease;
+        }
+        .notice-item:last-child {
+            border-bottom: none;
+        }
+        .notice-item:hover {
+            background-color: #fdfdfd;
+        }
+        .notice-link {
+            display: flex;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+        .date {
+            font-family: "Courier New", Courier, monospace;
+            color: #718096;
+            font-size: 1rem;
+            font-weight: 500;
+            width: 120px;
+            flex-shrink: 0;
+        }
+        .title {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            flex-grow: 1;
+            padding-right: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .arrow {
+            color: #cbd5e0;
+            font-size: 1.1rem;
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+        }
+        .notice-link:hover .arrow {
+            transform: translateX(4px);
+            color: var(--primary-color);
         }
         .footer {
             text-align: center;
-            padding: 2rem;
-            color: #7f8c8d;
+            padding: 2.5rem 1rem;
+            color: #a0aec0;
             font-size: 0.9rem;
+        }
+
+        /* 📱 RWD 響應式斷點調整（手機與舊款 Pad 縱向） */
+        @media (max-width: 600px) {
+            .header { padding: 1.75rem 1rem; }
+            .header h1 { font-size: 1.4rem; }
+            .container { margin: 1rem auto; padding: 0 0.75rem; }
+            .notice-link {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem 1.25rem;
+                position: relative;
+            }
+            .date {
+                font-size: 0.85rem;
+                margin-bottom: 0.35rem;
+                width: auto;
+            }
+            .title {
+                font-size: 1rem;
+                white-space: normal;
+                overflow: visible;
+                text-overflow: clip;
+                padding-right: 1.5rem;
+                line-height: 1.4;
+            }
+            .arrow {
+                position: absolute;
+                right: 1.25rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .notice-link:hover .arrow {
+                transform: translate(0, -50%);
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <!-- 💡 這裡可以修改成你的社區名稱 -->
-        <h1>幸福綠園社區 電子公佈欄</h1>
+        <h1>社區智慧電子公佈欄</h1>
     </div>
 
     <div class="container">
-        <!-- ==========================================
-             📌 【公告資料區】未來不定期添加資料，只改這裡！
-             ========================================== -->
+        <!-- 📌 公告列表區：未來新增公告，就複製一組 <li> 放到最上面 -->
+        <ul class="notice-list">
+            
+            <!-- 第一則公告 -->
+            <li class="notice-item">
+                <a href="post001.html" class="notice-link">
+                    <span class="date">2026/11/09</span>
+                    <span class="title">11月份管委會定期會議開會通知</span>
+                    <span class="arrow">❯</span>
+                </a>
+            </li>
 
-        <!-- 公告項目開始 -->
-        <div class="notice-card pinned">
-            <div class="notice-meta">
-                <span>發佈日期：2026/11/02</span>
-                <span class="badge important">重要置頂</span>
-            </div>
-            <h2 class="notice-title">11月份管委會定期會議開會通知</h2>
-            <p class="notice-content">時間：11月15日（日）晚間 19:30
-            地點：一樓社區交誼廳
-            本次會議將討論「明年物業管理續約案」與「外牆清洗工程排程」，歡迎全體住戶出席旁聽。</p>
-        </div>
-        <!-- 公告項目結束 -->
+            <!-- 第二則公告 -->
+            <li class="notice-item">
+                <a href="post002.html" class="notice-link">
+                    <span class="date">2026/10/31</span>
+                    <span class="title">10月份社區財務收支明細表已公佈</span>
+                    <span class="arrow">❯</span>
+                </a>
+            </li>
 
-        <!-- 公告項目開始 -->
-        <div class="notice-card">
-            <div class="notice-meta">
-                <span>發佈日期：2026/10/31</span>
-                <span class="badge finance">財務公告</span>
-            </div>
-            <h2 class="notice-title">10月份社區財務收支明細表已公佈</h2>
-            <p class="notice-content">10月份的社區財務報表已製作完畢，紙本同步張貼於各棟電梯公佈欄。
-            住戶如需查閱詳細單據憑證，請於每週二、五晚間至管理室找總幹事閱覽。</p>
-        </div>
-        <!-- 公告項目結束 -->
-
-        <!-- 公告項目開始 -->
-        <div class="notice-card">
-            <div class="notice-meta">
-                <span>發佈日期：2026/10/25</span>
-                <span class="badge general">常規公告</span>
-            </div>
-            <h2 class="notice-title">社區消防設備年度檢測申報圓滿完成</h2>
-            <p class="notice-content">本年度社區消防安全設備檢修申報，經消防專技人員複查複驗，已於今日正式向消防局申報完成，全社區設備皆符合安全規範，請住戶安心。</p>
-        </div>
-        <!-- 公告項目結束 -->
-
-        <!-- ==========================================
-             📌 【公告資料區】結束
-             ========================================== -->
+        </ul>
     </div>
 
     <div class="footer">
-        <p>© 幸福綠園社區管理委員會 智慧管理系統</p>
+        <p>© 社區管理委員會 智慧管理系統</p>
     </div>
 
 </body>
