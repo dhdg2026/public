@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社區電子公佈欄</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; background: #f8f9fa; color: #333; }
+        .header { background: #2c3e50; color: white; text-align: center; padding: 1.5rem; border-radius: 8px; }
+        .notice-list { margin-top: 2rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); padding: 0; list-style: none; }
+        .notice-item { border-bottom: 1px solid #eee; }
+        .notice-item:last-child { border-bottom: none; }
+        .notice-link { display: flex; align-items: center; padding: 1rem 1.5rem; text-decoration: none; color: #333; transition: background 0.2s; }
+        .notice-link:hover { background: #fdfdfd; }
+        .date { color: #7f8c8d; font-size: 0.9rem; min-width: 110px; font-variant-numeric: tabular-nums; }
+        .title { font-weight: bold; color: #2c3e50; flex-grow: 1; }
+        .arrow { color: #bdc3c7; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>社區電子公佈欄</h1>
+    </div>
+
+    <!-- 📌 公告列表（不定期更新只改這裡） -->
+    <ul class="notice-list">
+        
+        <!-- 第一則公告 -->
+        <li class="notice-item">
+            <a href="post001.html" class="notice-link">
+                <span class="date">2026/11/02</span>
+                <span class="title">11月份管委會定期會議開會通知</span>
+                <span class="arrow">❯</span>
+            </a>
+        </li>
+
+        <!-- 第二則公告 -->
+        <li class="notice-item">
+            <a href="post002.html" class="notice-link">
+                <span class="date">2026/10/31</span>
+                <span class="title">10月份社區財務收支明細表已公佈</span>
+                <span class="arrow">❯</span>
+            </a>
+        </li>
+
+    </ul>
+
+</body>
+</html>
